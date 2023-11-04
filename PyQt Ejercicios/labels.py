@@ -13,6 +13,10 @@ class Window(QWidget):
         
 
     def UI(self):
+       text1=QLabel("Hello Python",self)
+       text2=QLabel("Hello Python",self)
+       text1.move(100,50)
+       text1.move(200,50)
        self.show()
 
 
