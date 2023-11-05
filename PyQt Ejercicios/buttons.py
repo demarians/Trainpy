@@ -27,10 +27,13 @@ class Window(QWidget):
     def enterFunc(self):
         self.text.setText("You clicked Enter") # if you have a variable text too short to update
         # you need then to reset the length of it
-        self.text.resize(150,20)
+        # self.text.resize(150,20)
+        # resize is terrible, because you need to manually set the size
+        self.text.adjustSize() # more convenient choice
     def exitFunc(self):
         self.text.setText("You clicked Exit")
-        self.text.resize(150,20)
+        # self.text.resize(150,20)
+        self.text.adjustSize()
 
 
 def main():
