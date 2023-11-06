@@ -21,17 +21,17 @@ class Window(QWidget):
        self.scoreComputerText.move(30,20)
        self.scoreComputerText.setFont(textFont)
        self.scorePlayer=QLabel("Your Score: ", self)
-       self.scorePlayer.move(30,20)
+       self.scorePlayer.move(300,20)
        self.scorePlayer.setFont(textFont)
        #############Images###############
        self.imageComputer=QLabel(self)
-       self.imageComputer.setPixmap(QPixmap("images/rock.png"))
+       self.imageComputer.setPixmap(QPixmap("C:/Users/salva/Repositories/Trainpy/Projects/first_proj/images/rock.png"))
        self.imageComputer.move(50,100)
        self.imagePlayer=QLabel(self)
-       self.imagePlayer.setPixmap(QPixmap("images/rock.png"))
+       self.imagePlayer.setPixmap(QPixmap("C:/Users/salva/Repositories/Trainpy/Projects/first_proj/images/rock.png"))
        self.imagePlayer.move(330,100)
        self.imageGame=QLabel(self)
-       self.imageGame.setPixmap(QPixmap("images/game.png"))
+       self.imageGame.setPixmap(QPixmap("C:/Users/salva/Repositories/Trainpy/Projects/first_proj/images/game.png"))
        self.imageGame.move(230,160)
 
     
