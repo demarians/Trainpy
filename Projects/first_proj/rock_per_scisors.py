@@ -7,7 +7,8 @@ from random import randint
 
 textFont=QFont("Times",14)
 buttonFont=QFont("Arial",12)
-
+computerScore=0
+playerScore=0
 
 class Window(QWidget):
     def __init__(self):
@@ -22,9 +23,9 @@ class Window(QWidget):
        self.scoreComputerText=QLabel("Computer Score: ", self)
        self.scoreComputerText.move(30,20)
        self.scoreComputerText.setFont(textFont)
-       self.scorePlayer=QLabel("Your Score: ", self)
-       self.scorePlayer.move(300,20)
-       self.scorePlayer.setFont(textFont)
+       self.scorePlayerText=QLabel("Your Score: ", self)
+       self.scorePlayerText.move(300,20)
+       self.scorePlayerText.setFont(textFont)
        #############Images###############
        self.imageComputer=QLabel(self)
        self.imageComputer.setPixmap(QPixmap("C:/Users/salva/Repositories/Trainpy/Projects/first_proj/images/rock.png"))
@@ -71,10 +72,47 @@ class Window(QWidget):
         self.timer.start()
 
     def stop(self):
+        global computerScore # to update the variables
+        global playerScore
         self.timer.stop()
 
+        if self.rndComputer == 1 and self.rndPlayer == 1:
+            mbox=QMessageBox.information(self, "Information", "Draw game")
+        elif self.rndComputer == 1 and self.rndPlayer == 2:
+            mbox=QMessageBox.information(self, "Information", "Player wins")
+            playerScore += 1
+            self.scorePlayerText.setText("Your Score: {}".format(playerScore))
+        elif self.rndComputer == 1 and self.rndPlayer == 3:
+            mbox=QMessageBox.information(self, "Information", "Computer wins")
+            computerScore += 1
+            self.scoreComputerText.setText("Computer Score: {}".format(computerScore))
+        elif self.rndComputer == 2 and self.rndPlayer == 1:
+            mbox=QMessageBox.information(self, "Information", "Computer wins")
+            computerScore += 1
+            self.scoreComputerText.setText("Computer Score: {}".format(computerScore))
+        elif self.rndComputer == 2 and self.rndPlayer == 2:
+            mbox=QMessageBox.information(self, "Information", "Draw game")
+        elif self.rndComputer == 2 and self.rndPlayer == 3:
+            mbox=QMessageBox.information(self, "Information", "Player wins")
+            playerScore += 1
+            self.scorePlayerText.setText("Your Score: {}".format(playerScore))
+        elif self.rndComputer == 3 and self.rndPlayer == 1:
+            mbox=QMessageBox.information(self, "Information", "Player wins")
+            playerScore += 1
+            self.scorePlayerText.setText("Your Score: {}".format(playerScore))
+        elif self.rndComputer == 3 and self.rndPlayer == 2:
+            mbox=QMessageBox.information(self, "Information", "Computer wins")
+            computerScore += 1
+            self.scoreComputerText.setText("Computer Score: {}".format(computerScore))
+        elif self.rndComputer == 3 and self.rndPlayer == 3:
+            mbox=QMessageBox.information(self, "Information", "Draw game")
+        
+        if computerScore == 3 or playerScore == 3:
+            mbox=QMessageBox.information(self, "Information", "Game Over")
+            sys.exit()
 
-    
+        ### TO DO , why it is not printing the score in the window, .format not working somehow
+
 def main():
     App=QApplication(sys.argv)
     window=Window()
