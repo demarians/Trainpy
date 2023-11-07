@@ -20,10 +20,10 @@ class Window(QWidget):
 
     def UI(self):
        #############Scores###############
-       self.scoreComputerText=QLabel("Computer Score: ", self)
+       self.scoreComputerText=QLabel("Computer Score:   ", self)
        self.scoreComputerText.move(30,20)
        self.scoreComputerText.setFont(textFont)
-       self.scorePlayerText=QLabel("Your Score: ", self)
+       self.scorePlayerText=QLabel("Your Score:   ", self)
        self.scorePlayerText.move(300,20)
        self.scorePlayerText.setFont(textFont)
        #############Images###############
