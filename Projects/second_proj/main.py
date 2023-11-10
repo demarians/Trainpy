@@ -16,30 +16,44 @@ class Main(QWidget):
 
     def UI(self):
         self.mainDesign()
-        self.layouts()  # sth wrong with the previous commit
+        self.layouts()  
 
 
     def mainDesign(self):
-        pass
+        self.employeeList=QListWidget()
+        self.btnNew=QPushButton("New")
+        self.btnUpdate=QPushButton("Update")
+        self.btnDelete=QPushButton("Delete")
+
 
     def layouts(self):
+        ###############Layouts################
         self.mainLayout=QHBoxLayout()
         self.leftLayout=QFormLayout()
         self.rightMainLayout=QVBoxLayout()
         self.rightTopLayout=QHBoxLayout()
         self.rightBottomLayout=QHBoxLayout()
+        ######Adding child layouts to main layout###
 
         self.rightMainLayout.addLayout(self.rightTopLayout)
         self.rightMainLayout.addLayout(self.rightBottomLayout)
-        self.mainLayout.addLayout(self.leftLayout)
-        self.mainLayout.addLayout(self.rightMainLayout)
+        self.mainLayout.addLayout(self.leftLayout, 40)  # 40% o the mainLayout
+        self.mainLayout.addLayout(self.rightMainLayout, 60) #60% of the mainLayout
+        ######Adding widgets to layouts#########
 
-        self.setLayout()
+        self.rightTopLayout.addWidget(self.employeeList)
+        self.rightBottomLayout.addWidget(self.btnNew)
+        self.rightBottomLayout.addWidget(self.btnDelete)
+        self.rightBottomLayout.addWidget(self.btnUpdate)
+
+        ######Adding widgets to main Layout######
+
+        self.setLayout(self.mainLayout)
 
 
 def main():
     APP=QApplication(sys.argv)
-    window=main()
+    window=Main()
     sys.exit(APP.exec_())
 
 
