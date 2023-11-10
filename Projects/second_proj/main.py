@@ -16,6 +16,7 @@ class Main(QWidget):
 
     def UI(self):
         self.mainDesign()
+        ##aqui iria el siguiente codigo
 
 
     def mainDesign(self):
