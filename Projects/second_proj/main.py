@@ -2,9 +2,12 @@ import typing
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
 import sys
+import sqlite3
 
-from PyQt5.QtWidgets import QWidget
 
+
+con = sqlite3.connect('C:/Users/salva/Repositories/Trainpy/Projects/second_proj/employees.db')
+cur=con.cursor()
 
 class Main(QWidget):
     def __init__(self):
