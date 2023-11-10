@@ -16,7 +16,7 @@ class Main(QWidget):
 
     def UI(self):
         self.mainDesign()
-        self.layouts()
+        self.layouts()  # sth wrong with the previous commit
 
 
     def mainDesign(self):
