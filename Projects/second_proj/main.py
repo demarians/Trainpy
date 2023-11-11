@@ -73,6 +73,7 @@ class AddEmployee(QWidget):
         self.layouts()
 
     def mainDesign(self):
+        self.setStyleSheet("background-color:white;font-size:14pt;font-family:Times")
         #################Top Layout widgets###################
         self.title=QLabel("Add Person")
         self.title.setStyleSheet('font-size: 24pt;font-family:Arial Bold') # also possible to change background background-color:red
@@ -93,9 +94,11 @@ class AddEmployee(QWidget):
         self.emailEntry.setPlaceholderText("Enter Employee Email")
         self.imgLbl=QLabel("Picture: ")
         self.imgButton=QPushButton("Browse")
+        self.imgButton.setStyleSheet("background-color:orange;font-size:10pt")
         self.addressLbl=QLabel("Address: ")
         self.addressEditor=QTextEdit()
         self.addButton=QPushButton("Add")
+        self.addButton.setStyleSheet("background-color:orange;font-size:10pt")
         
 
 
