@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import *
 import sys
 import sqlite3
 
+from PyQt5.QtWidgets import QWidget
+
 
 
 con = sqlite3.connect('C:/Users/salva/Repositories/Trainpy/Projects/second_proj/employees.db')
@@ -25,6 +27,7 @@ class Main(QWidget):
     def mainDesign(self):
         self.employeeList=QListWidget()
         self.btnNew=QPushButton("New")
+        self.btnNew.clicked.connect(self.addEmployee)
         self.btnUpdate=QPushButton("Update")
         self.btnDelete=QPushButton("Delete")
 
@@ -52,6 +55,22 @@ class Main(QWidget):
         ######Adding widgets to main Layout######
 
         self.setLayout(self.mainLayout)
+
+
+    def addEmployee(self):  # i create an instance of a class not yet defined
+        self.newEmployee=AddEmployee()
+        self.close()
+
+class AddEmployee(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Add Employees")
+        self.setGeometry(450,150,350,600)
+        self.UI()
+        self.show()
+
+    def UI(self):
+        pass
 
 
 def main():
