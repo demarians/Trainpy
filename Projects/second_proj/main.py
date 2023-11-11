@@ -92,7 +92,7 @@ class AddEmployee(QWidget):
         self.phoneLbl=QLabel("Phone: ")
         self.phoneEntry=QLineEdit()
         self.phoneEntry.setPlaceholderText("Enter Employee Phone Number")
-        self.emailLbl=QLabel("Name: ")
+        self.emailLbl=QLabel("Email: ")
         self.emailEntry=QLineEdit()
         self.emailEntry.setPlaceholderText("Enter Employee Email")
         self.imgLbl=QLabel("Picture: ")
@@ -103,7 +103,7 @@ class AddEmployee(QWidget):
         self.addressEditor=QTextEdit()
         self.addButton=QPushButton("Add")
         self.addButton.setStyleSheet("background-color:orange;font-size:10pt")
-        
+        self.addButton.clicked.connect(self.addEmployee)
 
 
 
@@ -146,6 +146,27 @@ class AddEmployee(QWidget):
             img=Image.open(self.fileName)
             img=img.resize(size)
             img.save("C:/Users/salva/Repositories/Trainpy/Projects/second_proj/images/{}".format(defaultImg))
+
+    def addEmployee(self):
+        global defaultImg
+        name=self.nameEntry.text()
+        surname=self.surnameEntry.text()
+        phone=self.phoneEntry.text()
+        email=self.emailEntry.text()
+        img=defaultImg
+        address=self.addressEditor.toPlainText()
+        if (name and surname and phone !=""): #if they are not empty
+            try:
+                query="INSERT INTO employees (name,surname,phone,email,image,address) VALUES(?,?,?,?,?,?)"
+                cur.execute(query,(name,surname,phone,email,img,address))
+                con.commit()    #every time you change your database
+                QMessageBox.information(self,"Success","Person has been added to employees")
+            except:
+                QMessageBox.information(self,"Warning","Person has not been added to employees")
+        else:
+            QMessageBox.information(self,"Warning","Fields cannot be empty")
+
+
 
 def main():
     APP=QApplication(sys.argv)
