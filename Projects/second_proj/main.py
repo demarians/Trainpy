@@ -24,6 +24,7 @@ class Main(QWidget):
     def UI(self):
         self.mainDesign()
         self.layouts()  
+        self.getEmployees()
 
 
     def mainDesign(self):
@@ -63,6 +64,12 @@ class Main(QWidget):
         self.newEmployee=AddEmployee()
         self.close()
 
+    def getEmployees(self):
+        query="SELECT id,name,surname FROM employees" #not SELECT * coz not selecting all fields in the db
+        employees=cur.execute(query).fetchall()
+        for employee in employees:
+            self.employeeList.addItem(str(employee[0])+"-"+employee[1]+" "+employee[2])
+
 class AddEmployee(QWidget):
     def __init__(self):
         super().__init__()
@@ -74,6 +81,8 @@ class AddEmployee(QWidget):
     def UI(self):
         self.mainDesign()
         self.layouts()
+        self.getEmployees()
+        
 
     def mainDesign(self):
         self.setStyleSheet("background-color:white;font-size:14pt;font-family:Times")
