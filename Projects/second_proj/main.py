@@ -1,14 +1,17 @@
 import typing
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
-import sys
+import sys,os
 import sqlite3
 from PyQt5.QtGui import QPixmap,QFont
+from PIL import Image
+
 
 
 
 con = sqlite3.connect('C:/Users/salva/Repositories/Trainpy/Projects/second_proj/employees.db')
 cur=con.cursor()
+defaultImg="Trainpy/Projects/second_proj/icons/person.png"
 
 class Main(QWidget):
     def __init__(self):
@@ -95,6 +98,7 @@ class AddEmployee(QWidget):
         self.imgLbl=QLabel("Picture: ")
         self.imgButton=QPushButton("Browse")
         self.imgButton.setStyleSheet("background-color:orange;font-size:10pt")
+        self.imgButton.clicked.connect(self.uploadImg)
         self.addressLbl=QLabel("Address: ")
         self.addressEditor=QTextEdit()
         self.addButton=QPushButton("Add")
@@ -131,6 +135,17 @@ class AddEmployee(QWidget):
         ###########Setting main layout for window################
         self.setLayout(self.mainLayout)
 
+    def uploadImg(self):
+        global defaultImg
+        size=(128,128)  # width and heigth of the image
+        self.fileName,ok=QFileDialog.getOpenFileName(self,'Upload Image','','Image Files (*.jpg *.png)')    
+        if ok:
+            # print(self.fileName) # this will give the entire directory path
+            defaultImg=os.path.basename(self.fileName)
+            # print(newName)  #this is the just name of the file
+            img=Image.open(self.fileName)
+            img=img.resize(size)
+            img.save("C:/Users/salva/Repositories/Trainpy/Projects/second_proj/images/{}".format(defaultImg))
 
 def main():
     APP=QApplication(sys.argv)
