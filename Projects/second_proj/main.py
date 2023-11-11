@@ -3,8 +3,7 @@ from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
 import sys
 import sqlite3
-
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtGui import QPixmap,QFont
 
 
 
@@ -70,7 +69,34 @@ class AddEmployee(QWidget):
         self.show()
 
     def UI(self):
-        pass
+        self.mainDesign()
+        self.layouts()
+
+    def mainDesign(self):
+        self.title=QLabel("Add Person")
+        self.title.setStyleSheet('font-size: 24pt;font-family:Arial Bold') # also possible to change background background-color:red
+        self.imgAdd=QLabel()
+        self.imgAdd.setPixmap(QPixmap("C:/Users/salva/Repositories/Trainpy/Projects/second_proj/icons/person.png"))
+
+
+
+    def layouts(self):
+        ###########Creating main layouts###############
+        self.mainLayout=QVBoxLayout()
+        self.topLayout=QVBoxLayout()
+        self.bottomLayout=QFormLayout()
+        ###########Adding child layouts to main layouts#############3
+        self.mainLayout.addLayout(self.topLayout)
+        self.mainLayout.addLayout(self.bottomLayout)
+
+        ###########Adding widgets to layouts############
+        self.topLayout.addStretch()
+        self.topLayout.addWidget(self.title)
+        self.topLayout.addWidget(self.imgAdd)
+        self.topLayout.addStretch()
+
+        ###########Setting main layout for window################
+        self.setLayout(self.mainLayout)
 
 
 def main():
