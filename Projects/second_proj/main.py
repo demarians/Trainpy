@@ -161,11 +161,15 @@ class AddEmployee(QWidget):
                 cur.execute(query,(name,surname,phone,email,img,address))
                 con.commit()    #every time you change your database
                 QMessageBox.information(self,"Success","Person has been added to employees")
+                # self.close()
+                # self.main=Main()
             except:
                 QMessageBox.information(self,"Warning","Person has not been added to employees")
         else:
             QMessageBox.information(self,"Warning","Fields cannot be empty")
 
+    def closeEvent(self, event):
+        self.main=Main() # when i close my addEmployee window, i open a new main window
 
 
 def main():
