@@ -73,10 +73,30 @@ class AddEmployee(QWidget):
         self.layouts()
 
     def mainDesign(self):
+        #################Top Layout widgets###################
         self.title=QLabel("Add Person")
         self.title.setStyleSheet('font-size: 24pt;font-family:Arial Bold') # also possible to change background background-color:red
         self.imgAdd=QLabel()
         self.imgAdd.setPixmap(QPixmap("C:/Users/salva/Repositories/Trainpy/Projects/second_proj/icons/person.png"))
+        #################Bottom Layout widgets################
+        self.nameLbl=QLabel("Name: ")
+        self.nameEntry=QLineEdit()
+        self.nameEntry.setPlaceholderText("Enter Employee Name")
+        self.surnameLbl=QLabel("Surname: ")
+        self.surnameEntry=QLineEdit()
+        self.surnameEntry.setPlaceholderText("Enter Employee Surname")
+        self.phoneLbl=QLabel("Phone: ")
+        self.phoneEntry=QLineEdit()
+        self.phoneEntry.setPlaceholderText("Enter Employee Phone Number")
+        self.emailLbl=QLabel("Name: ")
+        self.emailEntry=QLineEdit()
+        self.emailEntry.setPlaceholderText("Enter Employee Email")
+        self.imgLbl=QLabel("Picture: ")
+        self.imgButton=QPushButton("Browse")
+        self.addressLbl=QLabel("Address: ")
+        self.addressEditor=QTextEdit()
+        self.addButton=QPushButton("Add")
+        
 
 
 
@@ -90,10 +110,20 @@ class AddEmployee(QWidget):
         self.mainLayout.addLayout(self.bottomLayout)
 
         ###########Adding widgets to layouts############
+                ##########top Layout###########
         self.topLayout.addStretch()
         self.topLayout.addWidget(self.title)
         self.topLayout.addWidget(self.imgAdd)
         self.topLayout.addStretch()
+        self.topLayout.setContentsMargins(110,20,10,30)
+                ##########bottom Layout###########
+        self.bottomLayout.addRow(self.nameLbl,self.nameEntry)        
+        self.bottomLayout.addRow(self.surnameLbl,self.surnameEntry)        
+        self.bottomLayout.addRow(self.phoneLbl,self.phoneEntry)        
+        self.bottomLayout.addRow(self.emailLbl,self.emailEntry)        
+        self.bottomLayout.addRow(self.imgLbl,self.imgButton)        
+        self.bottomLayout.addRow(self.addressLbl,self.addressEditor)   
+        self.bottomLayout.addRow("",self.addButton)   
 
         ###########Setting main layout for window################
         self.setLayout(self.mainLayout)
