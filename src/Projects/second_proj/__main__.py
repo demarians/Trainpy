@@ -11,7 +11,7 @@ from PIL import Image
 
 con = sqlite3.connect('C:/Users/salva/Repositories/Trainpy/Projects/second_proj/employees.db')
 cur=con.cursor()
-defaultImg="Trainpy/Projects/second_proj/icons/person.png"
+defaultImg="C:/Users/salva/Repositories/Trainpy/Projects/second_proj/icons/person.png"
 
 class Main(QWidget):
     def __init__(self):
@@ -24,14 +24,19 @@ class Main(QWidget):
     def UI(self):
         self.mainDesign()
         self.layouts()  
+        self.getEmployees()
+        self.displayFirstRecord()
 
 
     def mainDesign(self):
+        self.setStyleSheet("font-size:14pt;font-family:Arial Bold;")
         self.employeeList=QListWidget()
+        self.employeeList.itemClicked.connect(self.singleClicked)
         self.btnNew=QPushButton("New")
         self.btnNew.clicked.connect(self.addEmployee)
         self.btnUpdate=QPushButton("Update")
         self.btnDelete=QPushButton("Delete")
+        self.btnDelete.clicked.connect(self.deleteEmployee)
 
 
     def layouts(self):
@@ -63,6 +68,74 @@ class Main(QWidget):
         self.newEmployee=AddEmployee()
         self.close()
 
+    def getEmployees(self):
+        query="SELECT id,name,surname FROM employees" #not SELECT * coz not selecting all fields in the db
+        employees=cur.execute(query).fetchall()
+        for employee in employees:
+            self.employeeList.addItem(str(employee[0])+"-"+employee[1]+" "+employee[2])
+
+    def displayFirstRecord(self):
+        query="SELECT * FROM employees ORDER BY ROWid ASC LIMIT 1"
+        employee=cur.execute(query).fetchone()
+        print(employee)
+        img=QLabel()
+        img.setPixmap(QPixmap("C:/Users/salva/Repositories/Trainpy/Projects/second_proj/images/"+employee[5]))
+        name=QLabel(employee[1])
+        surname=QLabel(employee[2])
+        phone=QLabel(employee[3])
+        email=QLabel(employee[4])
+        address=QLabel(employee[6])
+        self.leftLayout.setVerticalSpacing(20)
+        self.leftLayout.addRow("",img)
+        self.leftLayout.addRow("Name",name)
+        self.leftLayout.addRow("Surname",surname)
+        self.leftLayout.addRow("Phone",phone)
+        self.leftLayout.addRow("Phone",email)
+        self.leftLayout.addRow("Address",address)
+
+    def singleClicked(self):
+        for i in reversed(range(self.leftLayout.count())):
+            widget=self.leftLayout.takeAt(i).widget()
+
+            if widget is not None:
+                widget.deleteLater()
+
+        employe_e=self.employeeList.currentItem().text()
+        id=employe_e.split("-")[0]
+        query=("SELECT * FROM employees WHERE id=?")
+        employee=cur.execute(query,(id,)).fetchone() # comma is necessary, single item tuple
+        img=QLabel()
+        img.setPixmap(QPixmap("C:/Users/salva/Repositories/Trainpy/Projects/second_proj/images/"+employee[5]))
+        name=QLabel(employee[1])
+        surname=QLabel(employee[2])
+        phone=QLabel(employee[3])
+        email=QLabel(employee[4])
+        address=QLabel(employee[6])
+        self.leftLayout.setVerticalSpacing(20)
+        self.leftLayout.addRow("",img)
+        self.leftLayout.addRow("Name",name)
+        self.leftLayout.addRow("Surname",surname)
+        self.leftLayout.addRow("Phone",phone)
+        self.leftLayout.addRow("Phone",email)
+        self.leftLayout.addRow("Address",address)
+ 
+    def deleteEmployee(self):
+        person=self.employeeList.currentItem().text()
+        print(person)
+        id =person.split("-")[0]
+        mbox=QMessageBox.question(self,"Warning","Are you sure you want to delete this employee?",QMessageBox.Yes|QMessageBox.No,QMessageBox.No)
+        if mbox==QMessageBox.Yes:
+            try:
+                query="DELETE FROM employees WHERE id=?"
+                cur.execute(query,(id,))
+                con.commit()
+                QMessageBox.information(self,"Info!!","Person has been deleted")
+                self.close()
+                self.main=Main()
+
+            except:
+                QMessageBox.information(self,"Warning!!","Person has not been deleted")
+
 class AddEmployee(QWidget):
     def __init__(self):
         super().__init__()
@@ -73,7 +146,7 @@ class AddEmployee(QWidget):
 
     def UI(self):
         self.mainDesign()
-        self.layouts()
+        self.layouts()  
 
     def mainDesign(self):
         self.setStyleSheet("background-color:white;font-size:14pt;font-family:Times")
