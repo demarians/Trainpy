@@ -1,0 +1,55 @@
+Targets:
+
+Skills to learn:
+
+Mariano:
+- python
+- sql, mongoDB (database)
+- pyqt
+- git
+- html
+- continous integration:
+1. develop
+2. test (unit tests)
+3. report
+4. release (jenkins)
+release branch (stable version), master(development version), specific development branch  
+- docker
+
+Kilian:
+- data engineering / data wrangling
+- web scraping
+- c++, python bindings, (CMake)
+- add python package to pip
+- machine learning
+- ROS, MoveIt
+
+
+
+
+
+repository:
+
+
+LICENSE
+setup.py
+requirements.txt
+ReadMe.md
+.gitignore
+\src
+	\first_proj
+		__init__.py (module requirements)
+		readme.txt
+		__main__.py
+		...
+	\second_proj
+\bib (common code)
+	\widgets
+	\data_wrangling
+\test
+\data
+	\img
+	\raw_data
+	\standardized_data
+\examples
+\notes
