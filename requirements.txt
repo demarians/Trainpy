@@ -1,0 +1,4 @@
+Please for the description of the commits use the following legend signs from now on
++ To add new info
+- To delete info
+! Update info
