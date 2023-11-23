@@ -1,0 +1,96 @@
+~ (tilde) Alt+126
+There is also interesting info in the course about markdowns that can be use in GitHub
+
+**Useful command for Git bash**
+
+
+dir: shows the directory with all the files
+cd : home directory
+mkdir name_of_folder: create a new folder
+ls: list all the files inside the folder
+ls -a:list all the files inside the folder
+ls -all: list also the hidden files inside the folder
+code: opens your default Git editor, in my case Visual Studio
+clear: clear the terminal
+open . : it opens the folder
+
+ex.:	salva (master) GitGithubMasterclass
+git clone https:... :to clone a repos, but first move to the cd you want it
+git init: initialise a repository in the folder GitGithubMasterclass
+git add index.html: stages the index.html before any commit
+git commit -m "Insert a comment related to the commit": commit the file
+git commit -a -m "...": adds the file and commits, a stands for all files
+git commit -am: is the same command as above
+git diff index.html: gives a comparison between version files commited and not commited
+git config --list: gives all the config paramet maiers
+git config --global: to set parameters
+git config --global core.editor "code --wait": to set VSCodeStudio as default editor
+git config --global user.name
+git diff c64fe87 -p: to compare versions c64fe87(hexadecimal code of commit) with master
+git diff c64fe87 wdfjwkef: to compare different commits
+git log:  to have a look at the different commits of a project from different people.
+git log --graph: as git log but to track the relation between branches and commits
+git log --pretty=oneline : show all the commits as log but just in one line
+git shortlog: easy short log of all commits
+git log--author="lalorosas": filter commits of a user contribuitor
+git log --grep=#2 : to filter commits in large repos
+git log --grep=#2 --author="lalorosas" --since=1.day: to filter commits in large repos
+git show c64fe87: all the info about the commit
+git show HEAD: shows the commit related to the master
+git show HEAD~3: shows 3 commits ago to the HEAD
+git annotate name_of_file: like a git log but of a single file
+git tag -a v1.0 -m "First public release": to create a version tag at some point
+git tag -a beta 924358fgj -m "beta version": to asign a tag in a specific commit
+git show tag v1.0: to know infomation about the tag and the commit that points
+git push origin --tags: to update tags into the remote
+
+If there is already a local repository, to uploaded into GitHub (Origin is the normal name, but can be anything)
+git remote add origin https://github.com/demarians/GitGithubMasterclass.git
+git push origin master
+
+git pull origin master
+To always pull from the master branch to the branch
+git branch --set-upstream-to=origin/master master
+You will only need to write every time: git pull
+
+git fetch: always needed to download changes from the GitHub before pulling
+git status: gives the situation on how many commits behind you are
+
+when the local repository is a clone of a github repository, there is no need to
+call for a git remote, because he already knows which remote repository it is.
+You can check it, calling git remote, and will show... origin
+
+when : or END, type q to be able to write again in the command window from Git Bash
+
+git checkout --dist/404.html: when you changed a file and saved them, not yet commited and want to unstage. Take the previous working file back.
+git reset HEAD dist/404.html: when you changed a file, saved it and added to be commited. To unstage the changes, but not yet back to previous working version. You need to run then a git checkout.
+So if you didnt add to commit yet, just a checkout.
+
+If you did commit and push to the repository a not working file, do a git log to 
+look at the previous hashes and use:
+git checkout da003428 dist/404.html
+
+git add. :to stage multiple files (. refers to all the files of a folder)
+git checkout --.: to unstage multiple files
+
+git branch name_branch: to create a branch from the master, "dev is my branch example"
+git branch: to check the branch was created, * means the branch you are currently in
+git checkout dev: you just changed your branch into the dev branch
+git checkout -b new_branch_name: you create a new branch and move directly to it
+
+to create a branch in GitHub, go to master-> create:branch:name_of_branch
+to not stage and commit files that you dont want to be public: open the .gitignore file
+and type /name_of_file	When you call git status, the .gitignore file will appear modified
+but the file you dont want to be commited wont appear.
+If you instead want to ignore an entire file: name_of_file/ 	or also 
+in case you want to ignore all txt files      name_of_file/*.txt
+in case you want to look at gitignore example or templates, go through gitignore in GitHub repository
+
+git push origin name_of_branch: to push a branch into GitHub
+git checkout --track origin/name_of_branch:when you created a branch in Github and you want to have in your local repository. First you create it, then it was set to track the remote (origin) test branch, and then we switch over to it.
+
+When we want to merge a branch into another.
+First checkout the final destination branch ex.	git checkout dev
+Then git merge add-bootstrap dev
+If you want to delete a branch after mergering, git branch -d add-bootstrap
+To abort a confict merge, git merge --abort
