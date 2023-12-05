@@ -19,9 +19,6 @@ class ErrorCodeEnum(enum.Enum):
 test_url = 'https://understat.com/match/23171'
 
 match_url = 'https://understat.com/match/'
-bl_url = 'https://understat.com/league/Bundesliga'
-
-bl = ['Bundesliga2023', 'Bundesliga2022', 'Bundesliga2021', 'Bundesliga2020', 'Bundesliga2019']
 
 
 
